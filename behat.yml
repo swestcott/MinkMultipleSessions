@@ -1,0 +1,11 @@
+default:
+  context:
+    parameters:
+      wd_host: 'http://localhost:4444/wd/hub'
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: http://html5labs.cloudapp.net
+      default_session: selenium2
+      javascript_session: selenium2
+      selenium2:
+        browser: chrome
