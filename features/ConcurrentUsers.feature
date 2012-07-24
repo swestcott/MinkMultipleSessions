@@ -1,4 +1,4 @@
-Feature: User can communicate with each other
+Feature: Users can communicate with each other
 
   Scenario: Simple 1-way chat
   	Given "User1" enters the chat room
