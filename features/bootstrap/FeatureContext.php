@@ -48,16 +48,16 @@ class FeatureContext extends MinkContext
             $this->params['wd_host']
         ));
         $this->getMink()->registerSession($user, new \Behat\Mink\Session($newDriver));
-        $this->getSession($user)->restart();
+        $this->getMink()->setDefaultSessionName($user);
+        $this->getSession()->restart();
 
-        $this->getSession($user)->visit($this->locatePath(
-            "WebSockets/ChatDemo/wsdemo.html"
-        ));
-        $this->getSession($user)->wait(self::MAX_WAIT,
+        $this->visit("WebSockets/ChatDemo/wsdemo.html");
+
+        $this->getSession()->wait(self::MAX_WAIT,
             "document.getElementById('status').innerHTML == 'Socket open'"
         );
 
-        $this->assertSession($user)->pageTextContains("Socket open");
+        $this->assertPageContainsText("Socket open");
     }
 
     /**
@@ -68,12 +68,13 @@ class FeatureContext extends MinkContext
         // Ensure message is unique
         $this->message = 'Selenium Test ' . microtime(true);
 
-        $this->getSession($user)->getPage()->fillField("chat", $this->message);
-        $this->getSession($user)->executeScript(
+        $this->getMink()->setDefaultSessionName($user);
+        $this->getSession()->getPage()->fillField("chat", $this->message);
+        $this->getSession()->executeScript(
             "$('form').submit();"
         );
 
-        $this->assertSession($user)->pageTextContains($this->message);
+        $this->assertPageContainsText($this->message);
     }
 
     /**
@@ -81,10 +82,11 @@ class FeatureContext extends MinkContext
      */
     public function shouldSeeThatMessage($user)
     {
-        $this->getSession($user)->wait(self::MAX_WAIT,
+        $this->getMink()->setDefaultSessionName($user);
+        $this->getSession()->wait(self::MAX_WAIT,
             "$('.them:contains(\"" . $this->message . "\")').size() == 1"
         );
 
-        $this->assertSession($user)->pageTextContains($this->message);
+        $this->assertPageContainsText($this->message);
     }
 }
