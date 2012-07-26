@@ -1,5 +1,7 @@
 # Demo of multiple Mink sessions using Behat
 
+Please refer to the supporting [blog post](http://swdesigns.co.uk/2012/07/multiple-sessions-with-behat-mink-and-selenium2/)
+
 ## Usage
 
 Clone this repo:
