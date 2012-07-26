@@ -86,6 +86,5 @@ class FeatureContext extends MinkContext
         );
 
         $this->assertSession($user)->pageTextContains($this->message);
-        $node = $this->getSession($user)->getPage()->find("css", ".them");
     }
 }
